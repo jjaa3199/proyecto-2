@@ -1,0 +1,9 @@
+{
+    "name": "dowar/productos",
+    "autoload": {
+        "psr-4": {
+            "Dowar\\Productos\\": "src/"
+        }
+    },
+    "require": {}
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Productos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="center">
+      <section class="center-vertical">
+        <div class="tarjetas">
+          <section class="margin-right">
+            <h2>Iniciar sesion</h2>
+          </section>
+
+          <section class="margin-right">
+            <form
+              name="sesionForm"
+              action="sesion.php"
+              onsubmit="return formLoginValidation()"
+              method="get"
+            >
+              <section>
+                <div style="display: flex; justify-content: space-between">
+                  <div class="margin-right">Usuario</div>
+
+                  <div>
+                    <input
+                      type="text"
+                      name="user"
+                      value=""
+                      autocomplete="user"
+                    />
+                  </div>
+                </div>
+
+                <div class="error">
+                  <p id="errorMessageUserName"></p>
+                </div>
+              </section>
+
+              <div class="break separator center"></div>
+
+              <section>
+                <div style="display: flex; justify-content: space-between">
+                  <div class="margin-right">Contraseña</div>
+
+                  <div>
+                    <input type="password" name="password" value="" />
+                  </div>
+                </div>
+
+                <div class="error">
+                  <p id="errorMessagePassword"></p>
+                </div>
+              </section>
+
+              <div class="break separator center"></div>
+
+              <section style="display: flex">
+                <button
+                  type="submit"
+                  style="width: 100%; align-self: flex-end"
+                  class="button-26"
+                >
+                  Enviar
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <div class="break separator center"></div>
+
+    <div class="center">
+      <a href="signup.html"
+        ><button type="button" class="button-2">Registrase</button></a
+      >
+    </div>
+
+    <script>
+      function formLoginValidation() {
+        clearErrorFields();
+
+        const user = document.forms.sesionForm.user.value;
+        const password = document.forms.sesionForm.password.value;
+        let status = true;
+
+        if (user == "") {
+          document.getElementById("errorMessageUserName").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+
+        if (password == "") {
+          document.getElementById("errorMessagePassword").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+        return status;
+      }
+
+      function clearErrorFields() {
+        document.getElementById("errorMessageUserName").innerHTML = "";
+        document.getElementById("errorMessagePassword").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

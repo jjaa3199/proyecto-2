@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div style="display: flex; justify-content: center">
+      <section style="display: flex; justify-content: space-between">
+        <div class="tarjetas" style="padding: 16px; margin: 16px">
+          <form
+            name="productForm"
+            action="add-products.php"
+            onsubmit="return productFormValidation()"
+            method="post"
+          >
+            <div class="break separator centrado"></div>
+
+            <section>
+              <div style="display: flex; justify-content: space-between">
+                <div class="margin-right">Existencia</div>
+
+                <div>
+                  <input type="number" name="stock" value="22" />
+                </div>
+              </div>
+
+              <div class="error">
+                <p id="errorMessageStock"></p>
+              </div>
+            </section>
+
+            <div class="break separator centrado"></div>
+
+            <section>
+              <div style="display: flex; justify-content: space-between">
+                <div class="margin-right">Precio</div>
+
+                <div>
+                  <input type="number" name="price" value="11" />
+                </div>
+              </div>
+
+              <div class="error">
+                <p id="errorMessagePrice"></p>
+              </div>
+            </section>
+
+            <section>
+              <div style="display: flex; justify-content: space-between">
+                <div class="margin-right">Resurtido</div>
+
+                <div>
+                  <input type="number" name="restocked" value="50" />
+                </div>
+              </div>
+
+              <div class="error">
+                <p id="errorMessageRestocked"></p>
+              </div>
+            </section>
+
+            <section>
+              <div style="display: flex; justify-content: space-between">
+                <div class="margin-right">Descripcion</div>
+
+                <div>
+                  <textarea name="description">ssss </textarea>
+                </div>
+              </div>
+
+              <div class="error">
+                <p id="errorMessageDescription"></p>
+              </div>
+            </section>
+
+            <div class="break separator centrado"></div>
+
+            <section>
+              <button style="display: block; width: 100%" class="button-18">
+                Enviar
+              </button>
+            </section>
+          </form>
+        </div>
+      </section>
+
+      <section style="display: flex; justify-content: space-between">
+        <div class="tarjetas">
+          <table id="products-table" class="products-table">
+            <thead>
+              <tr>
+                <th>Existencia</th>
+                <th>Precio</th>
+                <th>Resurtido</th>
+                <th>Descripcion</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      getProducts();
+      function getProducts() {
+        fetch("http://localhost/productos/get-products.php", {
+          method: "get",
+        })
+          .then(function (response) {
+            if (response.status >= 200 && response.status < 300) {
+              return response.text();
+            }
+            throw new Error(response.statusText);
+          })
+          .then(function (response) {
+            const products = JSON.parse(response);
+            showProducts(products);
+          });
+      }
+
+      function showProducts(products) {
+        let index = 1;
+        products.forEach((element) => {
+          const table = document.getElementById("products-table");
+          const row = table.insertRow(index);
+          const cel1 = row.insertCell(0);
+          const cel2 = row.insertCell(1);
+          const cel3 = row.insertCell(2);
+          const cel4 = row.insertCell(3);
+          cel1.innerHTML = element.existencia;
+          cel2.innerHTML = element.precio;
+          cel3.innerHTML = element.resurtido;
+          cel4.innerHTML = element.descripcion;
+          index++;
+        });
+      }
+
+      function productFormValidation() {
+        document.getElementById("errorMessageStock").innerHTML = "";
+        document.getElementById("errorMessagePrice").innerHTML = "";
+        document.getElementById("errorMessageRestocked").innerHTML = "";
+        document.getElementById("errorMessageDescription").innerHTML = "";
+
+        const stock = document.forms.productForm.stock.value;
+        const price = document.forms.productForm.price.value;
+        const restocked = document.forms.productForm.restocked.value;
+        const description = document.forms.productForm.description.value;
+        let status = true;
+
+        if (stock == "") {
+          document.getElementById("errorMessageStock").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+
+        if (price == "") {
+          document.getElementById("errorMessagePrice").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+
+        if (restocked == "") {
+          document.getElementById("errorMessageStocked").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+
+        if (description == "") {
+          document.getElementById("errorMessageDescription").innerHTML =
+            "Campo requerido";
+          status = false;
+        }
+
+        if (price.stock > 24) {
+          document.getElementById("errorMessageStock").innerHTML =
+            "Maximo 25 caracteres";
+          status = false;
+        }
+
+        if (price.length > 4) {
+          document.getElementById("errorMessagePrice").innerHTML =
+            "Maximo 4 caracteres";
+          status = false;
+        }
+
+        if (restocked.length > 4) {
+          document.getElementById("errorMessageRestocked").innerHTML =
+            "Maximo 4 caracteres";
+          status = false;
+        }
+
+        if (description.length > 25) {
+          document.getElementById("errorMessageDescription").innerHTML =
+            "Maximo 25 caracteres";
+          status = false;
+        }
+
+        return status;
+      }
+    </script>
+  </body>
+</html>

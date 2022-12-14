@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Productos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div style="display: flex; justify-content: center">
+      <section class="center-vertical">
+        <div class="tarjetas">
+          <section style="margin: 16px">
+            <h2>Registro</h2>
+          </section>
+
+          <section style="margin: 16px">
+            <form
+              name="signUpForm"
+              action="register.php"
+              onsubmit="return validarFormRegistro()"
+              method="post"
+            >
+              <section>
+                <div style="display: flex; justify-content: space-between">
+                  <div class="margin-right">Nombre</div>
+
+                  <div>
+                    <input
+                      type="text"
+                      name="nombre"
+                      value=""
+                      autocomplete="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="error">
+                  <p id="errorMessageName"></p>
+                </div>
+              </section>
+
+              <div class="break separator centrado"></div>
+
+              <section>
+                <div style="display: flex; justify-content: space-between">
+                  <div class="margin-right">Usuario</div>
+
+                  <div>
+                    <input
+                      type="text"
+                      name="usuario"
+                      value=""
+                      autocomplete="username"
+                    />
+                  </div>
+                </div>
+
+                <div class="error">
+                  <p id="errorMessageUserName"></p>
+                </div>
+              </section>
+
+              <div class="break separator centrado"></div>
+
+              <section>
+                <div style="display: flex; justify-content: space-between">
+                  <div class="margin-right">Contraseña</div>
+
+                  <div>
+                    <input
+                      type="password"
+                      name="contraseña"
+                      value=""
+                      min="5"
+                      max="15"
+                    />
+                  </div>
+                </div>
+
+                <div class="error">
+                  <p id="errorMessagePassword"></p>
+                </div>
+              </section>
+
+              <div class="break separator center"></div>
+
+              <section>
+                <button style="display: block; width: 100%" class="button-26">
+                  Enviar
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <div class="break separator centrado"></div>
+
+    <div class="center">
+      <a href="login.html"
+        ><button type="button" class="button-2">Iniciar sesion</button></a
+      >
+    </div>
+
+    <script>
+      function validarFormRegistro() {
+        clearErrorFields();
+
+        const name = document.forms.signUpForm.nombre.value;
+        const username = document.forms.signUpForm.usuario.value;
+        const password = document.forms.signUpForm.contraseña.value;
+
+        if (name == "") {
+          document.getElementById("errorMessageName").innerHTML =
+            "Campo requerido";
+          return false;
+        }
+
+        if (password == "") {
+          document.getElementById("errorMessagePassword").innerHTML =
+            "Campo requerido";
+          return false;
+        }
+
+        if (password.length < 5) {
+          document.getElementById("errorMessagePassword").innerHTML =
+            "La contraseña debe tener minimo 5 caracteres";
+          return false;
+        }
+
+        if (password.length > 15) {
+          document.getElementById("errorMessagePassword").innerHTML =
+            "La contraseña no puede tener mas de 15 caracteres";
+          return false;
+        }
+
+        if (username.length < 5) {
+          document.getElementById("errorMessageUserName").innerHTML =
+            "El usuario debe tener minimo 5 caracteres";
+          return false;
+        }
+
+        if (username.length > 15) {
+          document.getElementById("errorMessageUserName").innerHTML =
+            "El usuario no puede tener mas de 15 caracteres";
+          return false;
+        }
+      }
+
+      function clearErrorFields() {
+        document.getElementById("errorMessageName").innerHTML = "";
+        document.getElementById("errorMessageUserName").innerHTML = "";
+        document.getElementById("errorMessagePassword").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

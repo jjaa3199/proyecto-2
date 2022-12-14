@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Productos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- <section class="centrado" style="flex-wrap: wrap"> -->
+
+    <div style="display: flex; justify-content: center">
+      <!-- registro -->
+      <section
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 63vw;
+        "
+      >
+        <section style="margin: 16px">
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                justify-content: center;
+              "
+            >
+            <h1>Bienvenido</h1>
+            </div>
+          </section>
+
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                justify-content: center;
+              "
+            >
+              <a href="signup.html">
+                <button type="button" class="button-26">Registro</button>
+              </a>
+            </div>
+          </section>
+
+          <div class="break separator centrado"></div>
+
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                justify-content: center;
+              "
+            >
+              <a href="login.html">
+                <button type="button" class="button-26">Iniciar sesion</button>
+              </a>
+            </div>
+          </section>
+        </section>
+      </section>
+    </div>
+
+    <script>
+      function validarFormRegistro() {
+        document.getElementById("errorMessageNombreRegistro").innerHTML = "";
+        document.getElementById("errorMessageUsuarioRegistro").innerHTML = "";
+        document.getElementById("errorMessageContraseñaRegistro").innerHTML =
+          "";
+
+        const name = document.forms.registroForm.nombreRegistro.value;
+        const usuario = document.forms.registroForm.usuarioRegistro.value;
+        const contraseña = document.forms.registroForm.contraseñaRegistro.value;
+
+        if (name == "" || usuario == "" || contraseña == "") {
+          let requerido = "Campo requerido";
+
+          if (name == "") {
+            document.getElementById("errorMessageNombreRegistro").innerHTML =
+              requerido;
+          }
+
+          if (contraseña == "") {
+            document.getElementById(
+              "errorMessageContraseñaRegistro"
+            ).innerHTML = requerido;
+          }
+          return false;
+        }
+
+        if (contraseña.length < 5) {
+          document.getElementById("errorMessageContraseñaRegistro").innerHTML =
+            "La contraseña debe tener minimo 5 caracteres";
+          return false;
+        }
+
+        if (contraseña.length > 15) {
+          document.getElementById("errorMessageContraseñaRegistro").innerHTML =
+            "La contraseña no puede tener mas de 15 caracteres";
+          return false;
+        }
+
+        if (usuario.length < 5) {
+          document.getElementById("errorMessageUsuarioRegistro").innerHTML =
+            "El usuario debe tener minimo 5 caracteres";
+          return false;
+        }
+
+        if (usuario.length > 15) {
+          document.getElementById("errorMessageUsuarioRegistro").innerHTML =
+            "El usuario no puede tener mas de 15 caracteres";
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
